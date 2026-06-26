@@ -1,7 +1,11 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+
 public class App {
     public static void main(String[] args) throws Exception {
-         nomes.add("Rafael");
+        ArrayList<String> nomes = new ArrayList<>();
+
+        //Adiciona elementos a lista add()
+        nomes.add("Rafael");
         nomes.add("Mendes");
         //Acessar um elemento get(indice)
         //System.out.println(nomes.get(0));
