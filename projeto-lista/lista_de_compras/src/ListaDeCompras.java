@@ -1,122 +1,128 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ListaDeCompras {
+public class App {
     public static void main(String[] args) throws Exception {
+        Scanner inUser = new Scanner (System.in);
+         ArrayList<String> listaCompras = new ArrayList<>();
 
-       Scanner inUser = new Scanner(System.in);
-       ArrayList<String> lista = new ArrayList<>();
-       
-       int opcaoLista = 0;
-       int opcao = 0;
-       String novoItem = "";
-       String posicaoAlterar = ""; 
-       
-       
-            do{
+    int opcaoLista = 0;
+    int opcao = 0;
+    String novoItem;
+    int contadora = 0; 
+    
+    
+
+    
+              do{
+
                 try{
-                    System.out.println("""
-                    Bem vindos ao programa lista de compras
+    System.out.println("""
+                Bem vindos ao programa lista de compras
 
-                    Escolha a opção desejada:
+                Escolha a opção desejada
 
-                    1 - Criar uma nova lista de compras
-                    2 - Sair
+                1 - Criar um nova lista de compras
+                2 - Sair
+            
+        """);
+        opcaoLista = inUser.nextInt();
+        inUser.nextLine();
 
+        switch(opcaoLista){
+            case 1 -> {System.out.println("Lista criada com sucesso!");
+
+                do{
+                    System.out.println(""" 
+                        escolha a opcao desejada:
+                        1 - Adicionar um item a lista
+                        2 - Remover um item a lista
+                        3 - Exibir a lista de compras
+                        4 - Limpar a lista de compras
+                        5 - alterar item
+                        6 - Voltar ao menu principal 
                     """);
-                    opcaoLista = inUser.nextInt();
+                     
+                    opcao = inUser.nextInt();
                     inUser.nextLine();
 
-                    switch(opcaoLista){
+                    switch(opcao){
                         case 1 -> {
-                            System.out.println("Lista Criada com sucesso");
-
-                            do{
-                                System.out.println("""
-                                        Escolha a opção desejada:
-                                        1 - Adicionar um item da lista
-                                        2 - Remover item da lista
-                                        3 - Mostrar lista de compras
-                                        4 - Alterar item da Lista
-                                        5 - Limpar lista de compras
-                                        6 - Sair
-                                        """);
-                                    
-                                opcao = inUser.nextInt();
-                                inUser.nextLine();
-                                    
-                                switch(opcao){
-                                case 1 -> {
-                                    System.out.println("Você escolheu criar um item da lista");
-                                    System.out.println("Digite o nome do produto: ");                                    
-
-                                    novoItem = inUser.nextLine();
-                                    lista.add(novoItem);
-                                    
-                                }
-
-                                case 2 ->{
-                                    System.out.println("Você escolheu remover um item da lista");
-                                    System.out.println("Digite o número do item que deseja remover");
-                                    int remover = inUser.nextInt();
-                                    lista.remove(remover-1);
-                                }
-
-                                case 3 ->{
-                                    System.out.println("Você escolheu ver a lista");
-                                    int posicao = 0;
-
-                                    if (lista.size() > 0) {
-                                        for (String item : lista) {
-                                            System.out.printf("%d - %s%n", posicao + 1, item);
-                                            posicao++;
-                                        }
-                                    } else {
-                                        System.out.println("A lista está vazia");
-                                    }
-                                    
-                                    System.out.println("");   
-                                }
-                                case 4 -> {
-                                    System.out.println("Você escolheu alterar um item da lista");
-                                    System.out.println("Digite o número do item que deseja alterar: ");
-                                    int posicaoAlterar = inUser.nextInt();
-                                    inUser.nextLine();
-
-                                    if (posicaoAlterar >= 1 && posicaoAlterar <= lista.size()) {
-                                        System.out.println("Digite o novo valor: ");
-                                        String novoValor = inUser.nextLine();
-                                        lista.set(posicaoAlterar - 1, novoValor);
-                                        System.out.println("Item alterado com sucesso!");
-                                    } else {
-                                        System.out.println("Posição inválida!");
-                                    }
-                                }
-                                }
-                                case 5 ->{
-                                    System.out.println("Lista limpa com sucesso");
-                                    lista.clear();
-                                }
-
-                                }
-                           
-                             }while(opcao !=6);                    
-
-
+                            System.out.println("Você escolheu criar um item da lista");
+                            System.out.println("Digite o nome do produto");
                             
+                            novoItem = inUser.nextLine();
+                            listaCompras.add(novoItem);
+
                         }
-                        case 2 -> System.out.println("Obrigado por usar o nosso programa");
-                        default -> System.out.println("Erro: Entrada inválida");
-                    }
-            
-                }catch(Exception erro){
-                    System.out.println("Erro: Entrada invalida");
-                    inUser.nextLine();
-                    opcaoLista = 1;
-                }
-            
-            }while(opcaoLista != 2);        
-       
-       inUser.close();
+
+                          case 2 -> {
+                                    System.out.println("Você escolheu remover um item:");
+                                    String comprasRemover = inUser.nextLine();
+
+                                    boolean removido = listaCompras.remove(comprasRemover);
+
+                                if (removido) {
+                                    System.out.println("Compra removida com sucesso!");
+                                } else {
+                                    System.out.println("Item não encontrado.");
+                                    }
+                                }
+
+
+
+                        case 3 ->{
+                            System.out.println("Você escolheu ver a lista");
+                            for(int i =0 ; i < listaCompras.size(); i++){
+                                System.out.println((i+1) + " - " + listaCompras.get(i));
+                            }
+                        }
+
+                        case 4 -> {
+        listaCompras.clear();
+        System.out.println("Lista de compras limpa com sucesso!");
     }
+
+                    case 5 -> {
+                         System.out.println("Digite o nome do item que deseja alterar:");
+                         String itemAntigo = inUser.nextLine();
+
+                        int indice = listaCompras.indexOf(itemAntigo);
+
+                        if (indice != -1) {
+                        System.out.println("Digite o novo nome do item:");
+                        String itemNovo = inUser.nextLine();
+
+                        listaCompras.set(indice, itemNovo);
+
+                          System.out.println("Item alterado com sucesso!");
+                          } else {
+                            System.out.println("Item não encontrado.");
+                              }   
+}
+
+
+                    }
+
+                }while(opcao != 6);
+
+
+            }
+            case 2 -> System.out.println("Obrigada por utilizar nosso sistema.");
+            default -> System.out.println("Opção inválida");
+            }
+   
+
+    
+
+    }catch(Exception erro){
+        System.out.println("Erro na Entrada");
+        opcaoLista = 1;
+    }
+         }while(opcaoLista != 2);
+
+         inUser.close();
+    }
+      
+  
 }
