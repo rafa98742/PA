@@ -9,7 +9,8 @@ public class ListaDeCompras {
        
        int opcaoLista = 0;
        int opcao = 0;
-       String novoItem = ""; 
+       String novoItem = "";
+       int posicaoAlterar = 0; 
        
        
             do{
