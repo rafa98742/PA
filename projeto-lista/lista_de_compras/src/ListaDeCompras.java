@@ -76,15 +76,30 @@ public class ListaDeCompras {
                                     
                                     System.out.println("");   
                                 }
+                                case 4 -> {
+                                    System.out.println("Você escolheu alterar um item da lista");
+                                    System.out.println("Digite o número do item que deseja alterar: ");
+                                    int posicaoAlterar = inUser.nextInt();
+                                    inUser.nextLine();
 
-                                case 4 ->{
+                                    if (posicaoAlterar >= 1 && posicaoAlterar <= lista.size()) {
+                                        System.out.println("Digite o novo valor: ");
+                                        String novoValor = inUser.nextLine();
+                                        lista.set(posicaoAlterar - 1, novoValor);
+                                        System.out.println("Item alterado com sucesso!");
+                                    } else {
+                                        System.out.println("Posição inválida!");
+                                    }
+                                }
+                                }
+                                case 5 ->{
                                     System.out.println("Lista limpa com sucesso");
                                     lista.clear();
                                 }
 
                                 }
                            
-                             }while(opcao !=5);                    
+                             }while(opcao !=6);                    
 
 
                             
